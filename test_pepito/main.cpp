@@ -18,38 +18,9 @@ const char * images [] =
 	{	"https://1stwebdesigner.com/wp-content/uploads/2014/04/Wallpapers-For-Designers-37.png"
 	,	"http://www.bluthemes.com/assets/img/blog/12/mountains-dark.jpg"
 	,	"http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/code-wallpaper-1.png"
+	,	"https://images2.minutemediacdn.com/image/upload/c_crop,h_1193,w_2121,x_0,y_175/f_auto,q_auto,w_1100/v1554921998/shape/mentalfloss/549585-istock-909106260.jpg"
 	};
 
-const char gallery_html []	= "<h1>Gallery Title</h1>" 
-"<div class=\"slideshow-container\">																	    "
-"	<div class=\"mySlides fade\">																			"
-"		<div class=\"numbertext\">1 / 3</div>																"
-"		<img src=\"https://1stwebdesigner.com/wp-content/uploads/2014/04/Wallpapers-For-Designers-37.png\">	"
-"		<div class=\"text\">Caption One</div>																"															 
-"	</div>																									"
-"	<div class=\"mySlides fade\">																			"
-"		<div class=\"numbertext\">2 / 3</div>																"
-"		<img src=\"http://www.bluthemes.com/assets/img/blog/12/mountains-dark.jpg\">						"
-"		<div class=\"text\">Caption Two</div>																"
-"	</div>																									"
-"																											"
-"	<div class=\"mySlides fade\">																			"
-"		<div class=\"numbertext\">3 / 3</div>																"
-"		<img src=\"http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/code-wallpaper-1.png\">	"
-"		<div class=\"text\">Caption Three</div>																"
-"	</div>																									"
-"<a class=\"prev\" onclick=\"plusSlides(-1)\">&lt;</a>														"
-"<a class=\"next\" onclick=\"plusSlides(1)\">&gt;</a>														"
-"																											"
-"</div>																										"
-"<br>																										"
-"																											"
-"<div style=\"text-align:center\">																			"
-"  <span class=\"dot\" onclick=\"currentSlide(1)\"></span> 													"
-"  <span class=\"dot\" onclick=\"currentSlide(2)\"></span> 													"
-"  <span class=\"dot\" onclick=\"currentSlide(3)\"></span> 													"
-"</div>																										"																								 
-;
 
 const char gallery_css []	=
 "\n* {																			   "
@@ -217,12 +188,12 @@ int main(){
 
 	for(uint32_t iImage = 0; iImage < ::std::size(images); ++iImage) {
 		buffer.resize(strlen(sections[iImage]) + 1024);
-		int						lenToAppend			= sprintf_s(&buffer[0], buffer.size(), "<div class=\"mySlides fade\"> <div class=\"numbertext\">%lu / 3</div> <img src=\"%s\"> <div class=\"text\">Caption One</div> </div>", iImage + 1, images[iImage]);
+		int						lenToAppend			= sprintf_s(&buffer[0], buffer.size(), "<div class=\"mySlides fade\"> <div class=\"numbertext\">%lu / %zu</div> <img src=\"%s\"></div>", iImage + 1, ::std::size(images), images[iImage]);
 		content.append(&buffer[0], lenToAppend);
 	}
 
 	content.append("<a class=\"prev\" onclick=\"plusSlides(-1)\">&lt;</a>");
-	content.append("<a class=\"prev\" onclick=\"plusSlides(1)\">&lt;</a>");
+	content.append("<a class=\"prev\" onclick=\"plusSlides(1)\">&gt;</a>");
 	content.append("</div>");
 
 	content.append("<div style=\"text-align:center\">");
