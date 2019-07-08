@@ -221,6 +221,16 @@ int main(){
 		content.append(&buffer[0], lenToAppend);
 	}
 
+	content.append("<a class=\"prev\" onclick=\"plusSlides(-1)\">&lt;</a>");
+	content.append("<a class=\"prev\" onclick=\"plusSlides(1)\">&lt;</a>");
+	content.append("</div>");
+
+	content.append("<div style=\"text-align:center\">");
+	for(uint32_t iImage = 0; iImage < ::std::size(images); ++iImage) {
+		buffer.resize(strlen(sections[iImage]) + 1024);
+        int						lenToAppend			= sprintf_s(&buffer[0], buffer.size(),"<span class=\"dot\" onclick=\"currentSlide(%lu)\"></span>", iImage + 1);
+		content.append(&buffer[0], lenToAppend);
+	}
 	content.append("</div>");
 
 
