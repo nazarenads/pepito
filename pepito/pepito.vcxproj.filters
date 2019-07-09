@@ -15,13 +15,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pepito.cpp">
+    <ClCompile Include="pep_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pepito.h">
+    <ClInclude Include="pep_view.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pep_size.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pep_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gallery.css" />
+    <None Include="gallery.js" />
+    <None Include="copy_assets.bat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

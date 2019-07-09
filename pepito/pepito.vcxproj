@@ -155,10 +155,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="pepito.cpp" />
+    <ClCompile Include="pep_file.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pepito.h" />
+    <ClInclude Include="pep_file.h" />
+    <ClInclude Include="pep_size.h" />
+    <ClInclude Include="pep_view.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="copy_assets.bat" />
+    <None Include="gallery.css" />
+    <None Include="gallery.js" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
