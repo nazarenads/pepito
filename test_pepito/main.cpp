@@ -53,19 +53,29 @@ int main(){
 	const char				http_headers	[] = "content-type: text/html \r\n\r\n";
 	const char				title			[] = "My Page";
 
-	const char				head			[] = "<head><title>%s</title><style>%s</style></head>";
+	const char				head			[] = "<head><title>%s</title><style>%s</style><style>%s</style></head>";
 	const char				script			[] = "<script>%s</script>";
 	const char				body			[] = "<body>%s</body>";		
 
-
 	::std::string			content;
-	content.append("<table><tr>");
 	::std::vector<char>		buffer					= {};
 	const char				background_color	[]	= "FFCCAA";
+	const char				brandname           []	= "Pepito";
+	const char				logoURL				[]	= "https://www.logocrea.com/2/wp-content/uploads/2016/07/aguila1.png";
 
-	generateHTMLTagFromList(content, sections, ::pep::size(sections), sprintf_s(&buffer[0], buffer.size(), "<td style=\"background-color: %s;\">%s</td>", background_color, sections[iItem]));
-	content.append("</tr></table>");
+	//navbar
+	content.append("<div class=\"navbar\"><div class=\"navbar__wrapper\"><nav class=\"navbar__menu\">");
+	buffer.resize(strlen(brandname) + strlen(logoURL) + 2048);
+	int  newlenToAppend = sprintf_s(&buffer[0], buffer.size(),"<a class=\"navbar__brand\" href=\"#\">%s<img src=\"%s\" alt=\"\"></a>", brandname, logoURL);
+	content.append(&buffer[0], newlenToAppend);
+	content.append("<ul class=\"navbar__nav\">");
+	generateHTMLTagFromList(content, sections, ::pep::size(sections) , sprintf_s(&buffer[0], buffer.size(), "<li class=\"navbar__link after-transform\"><a class=\"active\" href=\"#\">%s</a></li>", sections[iItem]));
 
+
+	content.append("</ul>");
+	content.append("</nav></div></div>");
+	
+	//gallery
 	content.append("<h1>Gallery Title</h1>");
 	::htmlGenerateGallery(content, images);
 
@@ -74,8 +84,9 @@ int main(){
 	printf("<html>");
 	{
 		::std::vector<char>		gallery_css;
-		if(0 <= ::pep::fileToMemory("./gallery.css", gallery_css))
-			printf(head, title, &gallery_css[0]);
+		::std::vector<char>		header_css;
+		if(0 <= ::pep::fileToMemory("./gallery.css", gallery_css) && 0 <= ::pep::fileToMemory("./header.css", header_css))
+			printf(head, title, &gallery_css[0], &header_css[0]);
 	}
 	printf(body, &content[0]);
 	{
@@ -86,3 +97,30 @@ int main(){
 	printf("</html>");
 	return 0;
 }
+//const char headerHTML = <div class="header">                                                       
+//  <div class="navbar"><div class="navbar__wrapper"><nav class="navbar__menu"><a class="navbar__brand" href="#">Brand<img src="#" alt=""/></a><div id="nav-icon3"><span></span><span></span><span></span><span></span></div>
+//		  <ul class="navbar__nav">
+//          <li class="navbar__link after-transform"><a class="active" href="#">Inicio</a></li>
+//          <li class="navbar__link after-transform"><a href="#">Nosotros</a></li>
+//          <li class="navbar__link after-transform"><a href="#">Galeria</a></li>
+//          <li class="navbar__link after-transform"><a href="#">Blog</a></li>
+//          <li class="navbar__link after-transform"><a href="#">Contacto</a></li>
+//        </ul>
+//      </nav>
+//    </div>
+//  </div>
+//  <div class="navbar-responsive">
+//    <ul class="navbar-responsive__nav">
+//      <li class="navbar-responsive__link after-transform"><a class="active" href="#">Inicio</a></li>
+//      <li class="navbar-responsive__link after-transform"><a href="#">Nosotros</a></li>
+//      <li class="navbar-responsive__link after-transform"><a href="#">Galeria</a></li>
+//      <li class="navbar-responsive__link after-transform"><a href="#">Blog</a></li>
+//      <li class="navbar-responsive__link after-transform"><a href="#">Contacto</a></li>
+//    </ul>
+//  </div>
+//</div>
+
+
+
+
+
